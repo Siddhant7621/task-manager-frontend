@@ -41,22 +41,24 @@ export default function TaskModal({ isOpen, onClose, onSubmit, task, isLoading }
   });
 
   useEffect(() => {
-    if (task) {
-      reset({
-        title: task.title,
-        description: task.description || '',
-        status: task.status,
-        dueDate: task.dueDate ? task.dueDate.split('T')[0] : '',
-      });
-    } else {
-      reset({
-        title: '',
-        description: '',
-        status: 'OPEN',
-        dueDate: '',
-      });
-    }
-  }, [task, reset, isOpen]);
+  if (task) {
+    reset({
+      title: task.title,
+      description: task.description || "",
+      status: task.status,
+      dueDate: task.dueDate ? task.dueDate.split("T")[0] : "",
+    });
+  } else {
+    reset({
+      title: "",
+      description: "",
+      status: "OPEN",
+      dueDate: "",
+    });
+  }
+}, [task, reset]);
+
+
 
   if (!isOpen) return null;
 
