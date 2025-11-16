@@ -8,7 +8,7 @@ export interface Task {
   id: string;
   title: string;
   description?: string;
-  status: 'OPEN' | 'IN_PROGRESS' | 'COMPLETED'; // Make sure this matches your backend
+  status: "OPEN" | "IN_PROGRESS" | "COMPLETED"; // Make sure this matches your backend
   dueDate?: string;
   createdAt: string;
   updatedAt: string;
@@ -45,14 +45,14 @@ export interface TaskCreateRequest {
   title: string;
   description?: string;
   dueDate?: string;
-  status?: 'OPEN' | 'IN_PROGRESS' | 'COMPLETED';
+  status?: "OPEN" | "IN_PROGRESS" | "COMPLETED";
 }
 
 export interface TaskUpdateRequest {
   title?: string;
   description?: string;
   dueDate?: string;
-  status?: 'OPEN' | 'IN_PROGRESS' | 'COMPLETED';
+  status?: "OPEN" | "IN_PROGRESS" | "COMPLETED";
 }
 
 export interface TasksResponse {
@@ -64,6 +64,13 @@ export interface TasksResponse {
     totalPages: number;
     hasNext: boolean;
     hasPrev: boolean;
+    stats?: {
+      // Make stats optional since it might not always be there
+      total: number;
+      completed: number;
+      inProgress: number;
+      open: number;
+    };
   };
 }
 
