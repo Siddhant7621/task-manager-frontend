@@ -64,7 +64,7 @@ export interface TasksResponse {
     totalPages: number;
     hasNext: boolean;
     hasPrev: boolean;
-    stats?: {
+    stats: {
       // Make stats optional since it might not always be there
       total: number;
       completed: number;
