@@ -2,30 +2,30 @@ import { api } from '@/lib/api';
 import { Task, TaskCreateRequest, TaskUpdateRequest, TasksResponse } from '@/types';
 
 export const taskService = {
-  async getTasks(params?: {
-    page?: number;
-    limit?: number;
-    status?: string;
-    search?: string;
-  }): Promise<TasksResponse> {
-    const response = await api.get('/tasks', { params });
-    console.log('📨 Get Tasks Response:', response.data);
-    
-    return {
-      data: {
-        tasks: response.data.data,
-        pagination: {
-          page: response.data.meta.page,
-          limit: response.data.meta.limit,
-          total: response.data.meta.total,
-          totalPages: response.data.meta.pages,
-          hasNext: response.data.meta.page < response.data.meta.pages,
-          hasPrev: response.data.meta.page > 1,
-          stats: response.data.meta.stats, 
-        },
-      },
-    };
-  },
+  // In services/taskService.ts - REPLACE THE getTasks METHOD
+async getTasks(params?: {
+  page?: number;
+  limit?: number;
+  status?: string;
+  search?: string;
+}): Promise<TasksResponse> {
+  const response = await api.get('/tasks', { params });
+  console.log('📨 Get Tasks Response:', response.data);
+  
+  // FIX: Remove the extra "data" wrapper
+  return {
+    tasks: response.data.data,
+    pagination: {
+      page: response.data.meta.page,
+      limit: response.data.meta.limit,
+      total: response.data.meta.total,
+      totalPages: response.data.meta.pages,
+      hasNext: response.data.meta.page < response.data.meta.pages,
+      hasPrev: response.data.meta.page > 1,
+      stats: response.data.meta.stats, 
+    },
+  };
+},
 
   async getTask(id: string): Promise<{ task: Task }> {
     const response = await api.get(`/tasks/${id}`);
