@@ -62,7 +62,7 @@ export default function DashboardPage() {
       console.log("📥 Loading tasks...");
       const response = await taskService.getTasks({
         page,
-        limit: 10,
+        limit: 6,
         status: statusFilter || undefined,
         search: search || undefined,
       });
