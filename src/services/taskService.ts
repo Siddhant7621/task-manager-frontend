@@ -1,31 +1,34 @@
-import { api } from '@/lib/api';
-import { Task, TaskCreateRequest, TaskUpdateRequest, TasksResponse } from '@/types';
+import { api } from "@/lib/api";
+import {
+  Task,
+  TaskCreateRequest,
+  TaskUpdateRequest,
+  TasksResponse,
+} from "@/types";
 
 export const taskService = {
-  // In services/taskService.ts - REPLACE THE getTasks METHOD
-async getTasks(params?: {
-  page?: number;
-  limit?: number;
-  status?: string;
-  search?: string;
-}): Promise<TasksResponse> {
-  const response = await api.get('/tasks', { params });
-  console.log('📨 Get Tasks Response:', response.data);
-  
-  // FIX: Remove the extra "data" wrapper
-  return {
-    tasks: response.data.data,
-    pagination: {
-      page: response.data.meta.page,
-      limit: response.data.meta.limit,
-      total: response.data.meta.total,
-      totalPages: response.data.meta.pages,
-      hasNext: response.data.meta.page < response.data.meta.pages,
-      hasPrev: response.data.meta.page > 1,
-      stats: response.data.meta.stats, 
-    },
-  };
-},
+  async getTasks(params?: {
+    page?: number;
+    limit?: number;
+    status?: string;
+    search?: string;
+  }): Promise<TasksResponse> {
+    const response = await api.get("/tasks", { params });
+    console.log("📨 Get Tasks Response:", response.data);
+
+    return {
+      tasks: response.data.data, // ← DIRECT tasks
+      pagination: {
+        page: response.data.meta.page,
+        limit: response.data.meta.limit,
+        total: response.data.meta.total,
+        totalPages: response.data.meta.pages,
+        hasNext: response.data.meta.page < response.data.meta.pages,
+        hasPrev: response.data.meta.page > 1,
+        stats: response.data.meta.stats,
+      },
+    };
+  },
 
   async getTask(id: string): Promise<{ task: Task }> {
     const response = await api.get(`/tasks/${id}`);
@@ -33,14 +36,17 @@ async getTasks(params?: {
   },
 
   async createTask(data: TaskCreateRequest): Promise<{ task: Task }> {
-    const response = await api.post('/tasks', data);
-    console.log('📨 Create Task Response:', response.data);
+    const response = await api.post("/tasks", data);
+    console.log("📨 Create Task Response:", response.data);
     return { task: response.data };
   },
 
-  async updateTask(id: string, data: TaskUpdateRequest): Promise<{ task: Task }> {
+  async updateTask(
+    id: string,
+    data: TaskUpdateRequest
+  ): Promise<{ task: Task }> {
     const response = await api.patch(`/tasks/${id}`, data);
-    console.log('📨 Update Task Response:', response.data);
+    console.log("📨 Update Task Response:", response.data);
     return { task: response.data };
   },
 
@@ -50,7 +56,7 @@ async getTasks(params?: {
 
   async toggleTask(id: string): Promise<{ task: Task }> {
     const response = await api.post(`/tasks/${id}/toggle`);
-    console.log('📨 Toggle Task Response:', response.data);
+    console.log("📨 Toggle Task Response:", response.data);
     return { task: response.data };
   },
 
@@ -61,7 +67,7 @@ async getTasks(params?: {
     inProgress: number;
     open: number;
   }> {
-    const response = await api.get('/tasks/stats');
+    const response = await api.get("/tasks/stats");
     console.log("📊 Task Stats Response:", response.data);
 
     return {

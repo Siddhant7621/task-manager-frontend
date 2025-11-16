@@ -66,12 +66,13 @@ export default function DashboardPage() {
         status: statusFilter || undefined,
         search: search || undefined,
       });
-      console.log("✅ Tasks loaded:", response.data.tasks.length);
-      setTasks(response.data.tasks);
-      setStats(response.data.pagination.stats); // ⭐ add this
-      setHasMore(response.data.pagination.hasNext);
-      setHasPrev(response.data.pagination.hasPrev);
-      setTotalPages(response.data.pagination.totalPages);
+      console.log("✅ Tasks loaded:", response.tasks.length); // ← No .data
+      setTasks(response.tasks); // ← No .data
+      setStats(response.pagination.stats); // ← No .data
+      setHasMore(response.pagination.hasNext); // ← No .data
+      setHasMore(response.pagination.hasNext);
+      setHasPrev(response.pagination.hasPrev);
+      setTotalPages(response.pagination.totalPages);
     } catch (error: any) {
       console.error("🚨 Failed to load tasks:", error);
       showToast("Failed to load tasks", "error");
@@ -136,7 +137,6 @@ export default function DashboardPage() {
         error.response?.data?.message || "Failed to delete task",
         "error"
       );
-      
     }
   };
 
@@ -156,7 +156,6 @@ export default function DashboardPage() {
         error.response?.data?.message || "Failed to update task status",
         "error"
       );
-      
     }
   };
 
