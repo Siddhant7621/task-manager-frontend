@@ -10,15 +10,12 @@ import {
   XMarkIcon,
   ChartBarIcon,
   PlusIcon,
-  CogIcon,
   ArrowRightOnRectangleIcon,
-  UserCircleIcon,
 } from '@heroicons/react/24/outline';
 
 const navigation = [
   { name: 'Dashboard', href: '/dashboard', icon: ChartBarIcon },
   { name: 'Create Task', href: '/tasks/create', icon: PlusIcon },
-//   { name: 'Settings', href: '/settings', icon: CogIcon },
 ];
 
 export default function DashboardLayout({
@@ -99,11 +96,9 @@ export default function DashboardLayout({
             <div className="flex items-center gap-3 mb-3">
               <div className="flex-shrink-0">
                 <div className="h-8 w-8 rounded-lg bg-gradient-to-r from-cyan-500 to-blue-500 flex items-center justify-center shadow-lg">
-                  {user?.avatar ? (
-                    <img src={user.avatar} alt="" className="h-8 w-8 rounded-lg" />
-                  ) : (
-                    <UserCircleIcon className="h-5 w-5 text-white" />
-                  )}
+                  <span className="text-white text-sm font-medium">
+                    {user?.name?.charAt(0).toUpperCase()}
+                  </span>
                 </div>
               </div>
               <div className="min-w-0 flex-1">
@@ -171,13 +166,9 @@ export default function DashboardLayout({
               <div className="flex items-center px-3">
                 <div className="flex-shrink-0">
                   <div className="h-8 w-8 rounded-lg bg-gradient-to-r from-cyan-500 to-blue-500 flex items-center justify-center shadow-lg">
-                    {user?.avatar ? (
-                      <img src={user.avatar} alt="" className="h-8 w-8 rounded-lg" />
-                    ) : (
-                      <span className="text-white text-sm font-medium">
-                        {user?.name?.charAt(0).toUpperCase()}
-                      </span>
-                    )}
+                    <span className="text-white text-sm font-medium">
+                      {user?.name?.charAt(0).toUpperCase()}
+                    </span>
                   </div>
                 </div>
                 <div className="ml-3 min-w-0 flex-1">
@@ -218,13 +209,9 @@ export default function DashboardLayout({
               <div className="flex items-center">
                 <div className="flex-shrink-0">
                   <div className="h-8 w-8 rounded-lg bg-gradient-to-r from-cyan-500 to-blue-500 flex items-center justify-center shadow-lg">
-                    {user?.avatar ? (
-                      <img src={user.avatar} alt="" className="h-8 w-8 rounded-lg" />
-                    ) : (
-                      <span className="text-white text-sm font-medium">
-                        {user?.name?.charAt(0).toUpperCase()}
-                      </span>
-                    )}
+                    <span className="text-white text-sm font-medium">
+                      {user?.name?.charAt(0).toUpperCase()}
+                    </span>
                   </div>
                 </div>
                 <div className="ml-3">
@@ -243,17 +230,6 @@ export default function DashboardLayout({
           {children}
         </main>
       </div>
-
-      {/* Add custom styles for animations */}
-      <style jsx global>{`
-        @keyframes fade-in {
-          from { opacity: 0; transform: translateY(-10px); }
-          to { opacity: 1; transform: translateY(0); }
-        }
-        .animate-fade-in {
-          animation: fade-in 0.3s ease-out;
-        }
-      `}</style>
     </div>
   );
 }
