@@ -416,7 +416,9 @@ export default function DashboardPage() {
             setIsModalOpen(false);
             setEditingTask(null);
           }}
-          onSubmit={editingTask ? handleUpdateTask : handleCreateTask}
+          onSubmit={
+            editingTask ? (handleUpdateTask as any) : (handleCreateTask as any)
+          }
           task={editingTask}
         />
       </div>
